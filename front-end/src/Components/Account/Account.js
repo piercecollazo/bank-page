@@ -183,13 +183,13 @@ class Account extends Component {
                         </TableHead>
 
                         <TableBody>
-                            {this.props.authUser.transactions.reverse().map(item =>(
+                            {this.props.authUser.transactions.map(item =>(
                                 <TableRow key={item._id}>
                                     <TableCell>{item.business}</TableCell>
                                     <TableCell>{`$${item.cashAmount}`}</TableCell>
                                     <TableCell>{item.timestamp}</TableCell>
                                 </TableRow>
-                            ))}
+                            )).reverse()}
                         </TableBody>
 
                     </Table>

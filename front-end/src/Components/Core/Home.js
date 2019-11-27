@@ -21,7 +21,7 @@ class Home extends Component {
     render() {
         return (
 
-            <Grid container direction='row' justify='end' spacing={2}>
+            <Grid container direction='row' justify='flex-end' spacing={2}>
                 <Grid item xs={8}>
                     <Paper style={{width:'100%', textAlign:'center', padding: 5}}>
                         <h3>Welcome to Bank Page!</h3>
