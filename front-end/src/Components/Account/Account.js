@@ -46,7 +46,8 @@ class Account extends Component {
         })
     }
 
-    creditSubmit = ()=>{
+    creditSubmit = (event)=>{
+        event.preventDefault()
         // This toggles the credit submission button's text
         this.setState({
             submitted:true
@@ -74,7 +75,8 @@ class Account extends Component {
         })
     }
 
-    transactionSubmit = ()=>{
+    transactionSubmit = (event)=>{
+        event.preventDefault()
         this.props.addTransaction(this.props.authUser.user.id,this.state.business,this.state.cashAmount)
             .then(()=>{
                 let cashNum = Number(this.state.cashAmount)
@@ -194,6 +196,7 @@ class Account extends Component {
 
                     </Table>
                 </Paper>
+                <br />
             </div>
         )
     }
