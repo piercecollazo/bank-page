@@ -20,7 +20,6 @@ export const signin = (userInfo) => async dispatch => {
         setAuthToken(token)
         localStorage.setItem('jwtToken', token)
         const decoded = jwt_decode(token)
-        console.log(decoded)
         dispatch(authUserSignIn(decoded, token))
         return Promise.resolve(decoded);
     } catch (error) {
@@ -43,6 +42,23 @@ export const getTransactions = (id)=> async dispatch =>{
 export const addTransaction = (id, name, amount)=> async dispatch =>{
     try{
         let success = await Axios.post(`/users/add-transaction/${id}`,{business:name, cashAmount: amount})
+        console.log(success.data)
+        dispatch({
+            type: ADD_TRANSACTION,
+            payload: success.data
+        })
+    } catch(error){
+        return Promise.reject(error)
+    }
+}
+
+export const changeCredit = (id, amount)=> async dispatch =>{
+    try{
+        let success = await Axios.post(`/users/change-credit/${id}`, {credit: amount})
+        dispatch({
+            type: CHANGE_CREDIT,
+            payload: success.data
+        })
     } catch(error){
         return Promise.reject(error)
     }
@@ -57,6 +73,7 @@ export const authUserSuccessful = (message) => dispatch => {
 
 
 export const authUserSignIn = (decoded, token) => dispatch => {
+    console.log(decoded)
     dispatch({
         type: AUTH_USER_SIGN_IN,
         payload: decoded,

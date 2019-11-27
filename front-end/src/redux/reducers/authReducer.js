@@ -35,7 +35,14 @@ export default function(state = initialState, action) {
         case CHANGE_CREDIT:
             return {
                 ...state,
-                user: action.payload
+                user:{
+                    email: action.payload.email,
+                    name: action.payload.name,
+                    id: action.payload.id,
+                    balance: action.payload.balance,
+                    creditScore: action.payload.creditScore,
+                    accountNumber: action.payload.accountNumber
+                }
             }
         
 

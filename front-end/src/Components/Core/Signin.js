@@ -53,7 +53,7 @@ class Signin extends Component {
             password: ''
           }
         })
-        console.log(this.props)
+        console.log(this.props.authUser.user)
         this.props.history.push('/account')
       }
     

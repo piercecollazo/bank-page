@@ -46,9 +46,10 @@ async function createJwtToken(user) {
     email: user.email,
     name: user.name,
     balance: user.balance,
-    creditScore: user.creditScore
+    creditScore: user.creditScore,
+    accountNumber: user.accountNumber
   }
-
+  
   let jwtToken = await jwt.sign(payload, process.env.SECRET_KEY, {expiresIn: 3600});
   return jwtToken;
 }

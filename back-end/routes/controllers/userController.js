@@ -46,16 +46,17 @@ module.exports = {
   },
   addTransaction: async (req, res) => {
     try{
-        let foundUser = await User.findById(req.body.userId)
+        let foundUser = await User.findById(req.params.id)
         let newTransaction = await new Transaction({
             business: req.body.business,
             cashAmount: Number.parseFloat(req.body.cashAmount).toFixed(2),
             account: req.body.userId
         })
         let savedTransaction = await newTransaction.save();
-         await foundUser.transactions.push(savedTransaction)
+        await foundUser.transactions.push(savedTransaction)
+        foundUser.balance += Number(req.body.cashAmount)
         foundUser.save();
-        res.status(200).json({transaction:savedTransaction, currentBalance: foundUser.balance})
+        res.status(200).json(savedTransaction)
     } catch(error){
         console.log(error)
         res.status(500).json({message: error})
@@ -64,18 +65,11 @@ module.exports = {
   },
   changeCredit: async (req,res) => {
     try{
-        let foundUser = await User.findById(req.body.userId)
-        if(foundUser.creditScore <= 850){
-            if(foundUser.creditScore += req.body.creditChange > 850){
-                foundUser.creditScore = 850
-                foundUser.save()
-                res.status(200).json(foundUser)
-            } else if (foundUser.creditScore += req.body.creditChange < 0){
-                foundUser.creditScore = 0
-                foundUser.save()
-                res.status(200).json(foundUser)
-            }
-        }
+        let foundUser = await User.findById(req.params.id)
+
+        foundUser.creditScore = req.body.credit
+        foundUser.save()
+        res.status(200).json(foundUser)
     } catch(error){
         res.status(500).json({message: error})
     }

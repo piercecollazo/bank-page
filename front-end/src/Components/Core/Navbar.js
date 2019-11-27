@@ -32,8 +32,7 @@ class Navbar extends Component {
     logout = ()=>{
         
         localStorage.removeItem('jwtToken')
-        handleLogout();
-        console.log(this.props.authUser.isAuthenticated)
+        this.props.handleLogout();
         this.props.history.push('/')
     }
 
@@ -50,7 +49,7 @@ class Navbar extends Component {
                         className={[this.props.classes.navLinkStyle, this.props.classes.signupAndSignin].join(' ')}
                         activeStyle={{color: 'white', textDecoration: 'underline white'}}
                     >
-                        {this.props.authUser.username || 'Username not fetched'}
+                        {`Welcome back, ${this.props.authUser.user.name}` || 'Username not fetched'}
                     </NavLink>
 
                     <NavLink
@@ -116,4 +115,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default withRouter(connect(mapStateToProps, null)(withStyles(styles)(Navbar)));
+export default withRouter(connect(mapStateToProps, {handleLogout})(withStyles(styles)(Navbar)));

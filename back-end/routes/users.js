@@ -15,6 +15,6 @@ router.post('/add-transaction/:id', userController.addTransaction)
 
 router.get('/get-transactions/:id',userController.getTransactions)
 
-router.get('/change-credit/:id', userController.changeCredit)
+router.post('/change-credit/:id', userController.changeCredit)
 
 module.exports = router;

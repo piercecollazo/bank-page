@@ -15,11 +15,10 @@ class Signup extends Component {
 
   state = {
     formData: {
-      username: '',
+      name: '',
       email: '',
       password: '',
-      confirmPassword: '',
-      gender: ''
+      confirmPassword: ''
     },
     submitted: false,
     redirectToggle: false,
@@ -45,6 +44,7 @@ class Signup extends Component {
     const { formData } = this.state;
     formData[event.target.name] = event.target.value;
     this.setState({ formData });
+    console.log(this.state)
   }
 
 
@@ -54,11 +54,10 @@ class Signup extends Component {
     this.setState({
       submitted: false,
       formData: {
-        username: '',
+        name: '',
         email: '',
         password: '',
-        confirmPassword: '',
-        gender: ''
+        confirmPassword: ''
       }
     })
   }

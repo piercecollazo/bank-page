@@ -2,14 +2,13 @@ const formArray = [
     {
       input: {
         type: 'text',
-        name: 'username',
-        id: 'input-username',
-        label: 'Username',
+        name: 'name',
+        id: 'input-name',
+        label: 'name',
         style: {
           width: '250px',
           marginTop: '15px'
         },
-        validators: ['required'],
         errorMessages: ['this field is required']
       }
     },
@@ -53,24 +52,6 @@ const formArray = [
         },
         validators: ['isPasswordMatch', 'required'],
         errorMessages: ['password mismatch', 'this field is required']
-      }
-    },
-    {
-      input: {
-        type: 'select',
-        name: 'gender',
-        id: 'input-gender',
-        label: 'Select',
-        select: true,
-        required: true,
-        genders: ['male', 'female', 'undefined'],
-        helperText: 'Please select your gender',
-        style: {
-          width: '250px',
-          marginTop: '15px'
-        },
-        validators: ['required'],
-        errorMessages: ['this field is required']
       }
     }
   ];

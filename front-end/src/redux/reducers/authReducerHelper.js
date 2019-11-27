@@ -14,10 +14,11 @@ export const jwtDecodeTokenAndSetUser = (oldState, token) => {
         isAuthenticated: true,
         user:{
             email: decoded.email,
-            username: decoded.username,
+            name: decoded.name,
             id: decoded.id,
             balance: decoded.balance,
-            credit: decoded.credit
+            creditScore: decoded.creditScore,
+            accountNumber: decoded.accountNumber
         }
     })
 }
