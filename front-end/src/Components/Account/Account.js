@@ -16,14 +16,15 @@ import 'react-circular-progressbar/dist/styles.css';
 import Slider from '@material-ui/core/Slider';
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField';
-
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 
 class Account extends Component {
     state = {
         creditScore: 0,
         business: '',
         cashAmount: 0,
-        submitted: false,
+        submittedCredit: false,
+        submittedTransaction: false,
         balance: 0
     }
     componentDidMount(){
@@ -50,10 +51,10 @@ class Account extends Component {
         event.preventDefault()
         // This toggles the credit submission button's text
         this.setState({
-            submitted:true
+            submittedCredit:true
         }, ()=>{setTimeout(() => {
             this.setState({
-                submitted:false
+                submittedCredit:false
             })
         }, 5000)})
         
@@ -77,6 +78,13 @@ class Account extends Component {
 
     transactionSubmit = (event)=>{
         event.preventDefault()
+        this.setState({
+            submittedTransaction:true
+        }, ()=>{setTimeout(() => {
+            this.setState({
+                submittedTransaction:false
+            })
+        }, 5000)})
         this.props.addTransaction(this.props.authUser.user.id,this.state.business,this.state.cashAmount)
             .then(()=>{
                 let cashNum = Number(this.state.cashAmount)
@@ -93,6 +101,7 @@ class Account extends Component {
                 })
             })
     }
+
 
     render() {
         return (
@@ -115,6 +124,10 @@ class Account extends Component {
                                 <Grid item xs={4}>
                                     <h4>Account #</h4>
                                     {this.props.authUser.user.accountNumber}
+                                </Grid>
+
+                                <Grid item xs={1}>
+                                    <InfoOutlinedIcon />
                                 </Grid>
                             </Grid>
                         </Paper>
@@ -141,6 +154,7 @@ class Account extends Component {
                         <Button variant='contained' color='primary' onClick={this.creditSubmit} >
                             {this.state.submitted ? 'Submitted!' : 'Update'}
                         </Button>
+                        <InfoOutlinedIcon />
                     </CardActions>
                     </Card>
                     </Grid>
@@ -167,6 +181,8 @@ class Account extends Component {
                                 <Button variant='contained' color='primary' onClick={this.transactionSubmit} >
                                 {this.state.submitted ? 'Submitted!' : 'Update'}
                                 </Button>
+
+                                <InfoOutlinedIcon />
                             </CardActions>
                         </Card>
                     </Grid>
@@ -181,6 +197,7 @@ class Account extends Component {
                                 <TableCell><h4>Business</h4></TableCell>
                                 <TableCell><h4>Amount</h4></TableCell>
                                 <TableCell><h4>Date</h4></TableCell>
+                                <TableCell><InfoOutlinedIcon/></TableCell>
                             </TableRow>
                         </TableHead>
 
